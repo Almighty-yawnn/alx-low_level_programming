@@ -2,7 +2,7 @@
 
 /**
  * more_numbers - Function to print ten times the numbers
- * Return: Always
+ * Return: 10 times of the number 0 to 14
  */
 
 void more_numbers(void)
