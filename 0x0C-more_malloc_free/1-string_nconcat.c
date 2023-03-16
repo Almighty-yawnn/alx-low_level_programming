@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 /**
- * string_nconcat - Function that allocates memory for an array
- * @s1: character to be used
- * @s2: character to be used
+ * string_nconcat - Function that concatenate two strings
+ * @s1: string to be used
+ * @s2: string to be used
  * @n: integer
  * Return: Always
  */
