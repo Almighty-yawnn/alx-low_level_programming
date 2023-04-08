@@ -8,8 +8,10 @@
 
 unsigned int binary_to_unit(const char *b)
 {
-	unsigned int l, m = 0, a;
-	unsigned int p = 2;
+	unsigned int l;
+	int a;
+	unsigned int m = 0;
+
 
 	if (b == NULL)
 	{
@@ -18,18 +20,17 @@ unsigned int binary_to_unit(const char *b)
 
 	l = strlen(b);
 
-	for (a = l - 1; a > 0; a--)
+	for (a = l - 1; a >= 0; a--)
 	{
-		if (b[a] != '0' || b[a] != '1')
+		if (b[a] != '0' && b[a] != '1')
 		{
 			return (0);
 		}
 
 		if (b[a] == '1')
 		{
-			m = m + atoi(b) * p;
+			m += (1 << (l - a - 1));
 		}
-		p = p * 2;
 	}
 	return (m);
 }
