@@ -8,25 +8,26 @@
 
 void print_binary(unsigned long int n)
 {
-	int a;
-	int b;
-	unsigned long int y = 1;
+	int b = 0;
+	unsigned long int y = 1UL << (sizeof(unsigned long int) * 8 - 1);
 
-	a = 0;
-	while (a < 63)
+	while (y)
 	{
-		y <<= 1;
-		a++;
-	}
-
-	b = 0;
-	while (b < 64)
-	{
-		if ((n & y) == 0)
-			_putchar('0');
-		else
+		if (n & y)
+		{
+			b = 1;
 			_putchar('1');
+		}
+		else
+			if (b)
+			{
+				_putchar('0');
+			}
 		y >>= 1;
-		b++;
 	}
+	if (!y)
+	{
+		_putchar('0');
+	}
+
 }
