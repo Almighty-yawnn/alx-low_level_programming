@@ -11,7 +11,7 @@ void print_binary(unsigned long int n)
 	int b = 0;
 	unsigned long int y = 1UL << (sizeof(unsigned long int) * 8 - 1);
 
-	while (y)
+	while (y > 0)
 	{
 		if (n & y)
 		{
@@ -25,7 +25,7 @@ void print_binary(unsigned long int n)
 			}
 		y >>= 1;
 	}
-	if (!y)
+	if (!b)
 	{
 		_putchar('0');
 	}
