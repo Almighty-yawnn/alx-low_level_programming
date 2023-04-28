@@ -7,37 +7,19 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	char *b;
-	FILE *file_d;
-	ssize_t num_track, num_read;
+	char *buf;
+	ssize_t fd;
+	ssize_t w;
+	ssize_t t;
 
-	if (filename == NULL)
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
 		return (0);
+	buf = malloc(sizeof(char) * letters);
+	t = read(fd, buf, letters);
+	w = write(STDOUT_FILENO, buf, t);
 
-	file_d = fopen(filename, "r");
-	if (file_d == NULL)
-		return (0);
-	b = malloc(letters + 1);
-	if (b == NULL)
-	{
-		fclose(file_d);
-		return (0);
-	}
-	num_read = fread(b, sizeof(char), letters, file_d);
-	if (num_read == 0)
-	{
-		free(b);
-		fclose(file_d);
-		return (0);
-	}
-	num_track = fwrite(b, sizeof(char), num_read, stdout);
-	if (num_track != num_read)
-	{
-		free(b);
-		fclose(file_d);
-		return (0);
-	}
-	free(b);
-	fclose(file_d);
-	return (num_read);
+	free(buf);
+	close(fd);
+	return (w);
 }
