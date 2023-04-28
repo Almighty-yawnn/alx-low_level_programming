@@ -9,32 +9,24 @@
 
 int create_file(const char *filename, char *text_content)
 {
-	int file_d;
-	size_t l;
-	ssize_t num_track;
+	int fd, w, len = 0;
 
 	if (filename == NULL)
 		return (-1);
 
-	file_d = open(filename, O_CREAT | O_WRONLY, 0600);
-
-	if (file_d == -1)
-		return (-1);
-
-	if (text_content == NULL)
+	if (text_content != NULL)
 	{
-		close(file_d);
-		return (1);
+		for (len = 0; text_content[len];)
+			len++;
 	}
 
-	l = strlen(text_content);
-	num_track = write(file_d, text_content, l);
+	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0600);
+	w = write(fd, text_content, len);
 
-	if (num_track != (ssize_t)l)
-	{
-		close(file_d);
+	if (fd == -1 || w == -1)
 		return (-1);
-	}
-	close(file_d);
+
+	close(fd);
+
 	return (1);
 }
